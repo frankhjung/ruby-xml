@@ -12,18 +12,18 @@ opts = Trollop::options do
     
 NAME
 
-    loadxml - a Ruby example program to show XML processing
+    #{File.basename($0)} - a Ruby example program to show XML processing
 
 SYNOPSIS
 
-    loadxml [options] <filename>
+    #{File.basename($0)} [options] <filename>
 
 OPTIONS
     
 USAGE
   opt :verbose, "Verbose output", :default => false, :short => '-v'
   opt :file, "XML filename to read", :default => 'test.xml', :short => '-f', :type => String
-  version "loadxml 0.0.1 (c) 2013 Frank H Jung"
+  version "#{File.basename($0)} 0.0.1 (c) 2013 Frank H Jung"
 end
 
 Trollop::die :file, "must exist" unless File.exist?(opts[:file]) if opts[:file]
