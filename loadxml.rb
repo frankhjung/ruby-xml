@@ -1,4 +1,5 @@
 #!/usr/bin/ruby -w
+# coding: utf-8
 
 require 'json'
 require 'trollop'
@@ -23,7 +24,7 @@ OPTIONS
 USAGE
   opt :verbose, "Verbose output", :default => false, :short => '-v'
   opt :file, "XML filename to read", :default => 'test.xml', :short => '-f', :type => String
-  version "#{File.basename($0)} 0.0.1 (c) 2013 Frank H Jung"
+  version "#{File.basename($0)} 0.0.1 © 2013 Frank H Jung"
 end
 
 Trollop::die :file, "must exist" unless File.exist?(opts[:file]) if opts[:file]
