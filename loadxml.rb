@@ -1,4 +1,4 @@
-#!/usr/bin/ruby -w
+#!/usr/bin/env ruby
 # coding: utf-8
 
 require 'json'
@@ -8,8 +8,10 @@ require 'xmlsimple'
 #
 # Command line options
 #
+
 opts = Trollop::options do
-  banner <<-USAGE
+    version "#{File.basename($0)} 0.0.1 © 2013 Frank H Jung"
+    banner <<-USAGE
     
 NAME
 
@@ -22,9 +24,8 @@ SYNOPSIS
 OPTIONS
     
 USAGE
-  opt :verbose, "Verbose output", :default => false, :short => '-v'
-  opt :file, "XML filename to read", :default => 'test.xml', :short => '-f', :type => String
-  version "#{File.basename($0)} 0.0.1 © 2013 Frank H Jung"
+    opt :verbose, "Verbose output", :default => false, :short => '-v'
+    opt :file, "XML filename to read", :default => 'test.xml', :short => '-f', :type => String
 end
 
 Trollop::die :file, "must exist" unless File.exist?(opts[:file]) if opts[:file]
