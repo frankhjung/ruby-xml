@@ -10,7 +10,7 @@ require 'xmlsimple'
 #
 
 opts = Trollop::options do
-  version "#{File.basename($0)} 0.0.1 © 2013 Frank H Jung"
+  version "#{File.basename($0)} 0.1.0 © 2013 Frank H Jung"
   banner <<-USAGE
 
   NAME
