@@ -2,6 +2,7 @@
 
 # References
 #
+# https://rubygems.org/gems/rake
 # http://en.wikipedia.org/wiki/Rake_(software)
 # http://www.ruby-doc.org/core-1.9.3/doc/rake/rakefile_rdoc.html
 
