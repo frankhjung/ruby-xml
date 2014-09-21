@@ -8,28 +8,26 @@
 
 require 'rake/clean'
 
-desc "build and test ruby load XML script"
-task :default => :help
+desc 'build and test ruby load XML script'
+task default: :help
 
 desc "Run loadxml help.\nFor Rakefile help call, rake -D"
 task :help do
-  ruby "loadxml.rb -h"
+  ruby 'loadxml.rb -h'
 end
 
-desc "Check Ruby script syntax"
+desc 'Check Ruby script syntax'
 task :check do
-  ruby "-c -w loadxml.rb"
-  system "rubocop loadxml.rb"
+  ruby '-c -w loadxml.rb'
+  system 'rubocop Rakefile loadxml.rb'
 end
 
-desc "Run script without parameters"
-task :run => :check do
-  ruby "loadxml.rb"
+desc 'Run script without parameters'
+task run: :check do
+  ruby 'loadxml.rb'
 end
 
-desc "Run script with test XML file"
-task :test => :run do
-  ruby "loadxml.rb -v test.xml"
+desc 'Run script with test XML file'
+task test: :run do
+  ruby 'loadxml.rb -v test.xml'
 end
-
-#EOF
