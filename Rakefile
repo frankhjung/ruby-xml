@@ -6,6 +6,8 @@
 # http://en.wikipedia.org/wiki/Rake_(software)
 # http://www.ruby-doc.org/core-1.9.3/doc/rake/rakefile_rdoc.html
 
+require 'rake/clean'
+
 desc "build and test ruby load XML script"
 task :default => :help
 
@@ -16,11 +18,12 @@ end
 
 desc "Check Ruby script syntax"
 task :check do
-  ruby "-c -W2 loadxml.rb"
+  ruby "-c -w loadxml.rb"
+  system "rubocop loadxml.rb"
 end
 
 desc "Run script without parameters"
-task :run do
+task :run => :check do
   ruby "loadxml.rb"
 end
 

@@ -9,57 +9,60 @@ require 'xmlsimple'
 # Command line options
 #
 
-opts = Trollop::options do
-  version "#{File.basename($0)} 0.1.0 © 2013 Frank H Jung"
+opts = Trollop.options do
+  version "#{File.basename($PROGRAM_NAME)} 0.1.0 © 2013 Frank H Jung"
   banner <<-USAGE
 
   NAME
 
-  #{File.basename($0)} - a Ruby example program to show XML processing
+  #{File.basename($PROGRAM_NAME)} - a Ruby example to show XML processing
 
   SYNOPSIS
 
-  #{File.basename($0)} [options] <filename>
+  #{File.basename($PROGRAM_NAME)} [options] <filename>
 
   OPTIONS
 
   USAGE
-  opt :verbose, "Verbose output", :default => false, :short => '-v'
-  opt :file, "XML filename to read", :default => 'test.xml', :short => '-f', :type => String
+  opt :verbose, 'Verbose output', default: false, short: '-v'
+  opt :file, 'XML filename to read',
+      default: 'test.xml', short: '-f', type: String
 end
 
-Trollop::die :file, "must exist" unless File.exist?(opts[:file]) if opts[:file]
+Trollop.die :file, 'must exist' unless File.exist?(opts[:file]) if opts[:file]
 
 #
 # MAIN
 #
 
 # read in xml document
-companies = XmlSimple.xml_in(opts[:file], {
-                               'KeyAttr' => 'name',
-                               'ForceArray' => [ 'year' ],
-                               'ContentKey' => '-content' })
+companies = XmlSimple.xml_in(
+              opts[:file],
+              'KeyAttr' => 'name',
+              'ForceArray' => ['year'],
+              'ContentKey' => '-content')
 
 # show a specific year
 puts "(1) show a specific year\n"
-turnover = companies['turnover']['year'].find { |year| year['id'] == "2012"}
+turnover = companies['turnover']['year'].find { |year| year['id'] == '2012' }
 printf "\tYear 2012 has turnover of %s\n\n", turnover['content']
 
 # show all years
 puts "(2) show all years\n"
-companies['turnover']['year'].each { |year|
+companies['turnover']['year'].each do |year|
   printf "\tYear %s has turnover of %s\n", year['id'], year['content']
-}
-puts "\n"
+end
+
+puts
 
 #  dump xml file
 if opts[:verbose]
   puts "(3) dump XML file\n"
-  File.open(opts[:file], 'r') do | xmlDoc |
+  File.open(opts[:file], 'r') do |xmlDoc|
     printf "\tContents of %s:\n", opts[:file]
-    xmlDoc.each_line { |line| printf "\t%s", line}
+    xmlDoc.each_line { |line| printf "\t%s", line }
   end
-  puts "\n"
+  puts
 end
 
 # dump xml document
@@ -67,5 +70,3 @@ if opts[:verbose]
   puts "(4) Dump the XML that was read\n"
   puts JSON.pretty_generate(companies)
 end
-
-#EOF
