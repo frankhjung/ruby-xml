@@ -45,12 +45,12 @@ companies = XmlSimple.xml_in(
 # show a specific year
 puts "(1) show a specific year\n"
 turnover = companies['turnover']['year'].find { |year| year['id'] == '2012' }
-printf "\tYear 2012 has turnover of %s\n\n", turnover['content']
+puts "\tYear 2012 has turnover of #{turnover['content']}\n\n"
 
 # show all years
 puts "(2) show all years\n"
 companies['turnover']['year'].each do |year|
-  printf "\tYear %s has turnover of %s\n", year['id'], year['content']
+  puts "\tYear #{year['id']} has turnover of #{year['content']}\n"
 end
 
 puts
@@ -60,7 +60,7 @@ if opts[:verbose]
   puts "(3) dump XML file\n"
   File.open(opts[:file], 'r') do |xmlDoc|
     printf "\tContents of %s:\n", opts[:file]
-    xmlDoc.each_line { |line| printf "\t%s", line }
+    xmlDoc.each_line puts "\t#{$LAST_READ_LINE}"
   end
   puts
 end
