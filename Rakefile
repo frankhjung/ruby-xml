@@ -1,18 +1,13 @@
-#!/usr/bin/rake
-
-# References
-#
-# https://rubygems.org/gems/rake
-# http://en.wikipedia.org/wiki/Rake_(software)
-# http://www.ruby-doc.org/core-1.9.3/doc/rake/rakefile_rdoc.html
-
+require 'benchmark'
 require 'rake/clean'
 require 'rdoc/task'
 require 'rubocop/rake_task'
 
+task default: :test
+task cleanall: [:clean, :clobber]
+task all: [:clean, :clobber, :check, :test, :build]
+
 srcs = FileList.new('*.rb', 'Rakefile')
-desc 'build and test ruby load XML script'
-task default: :run
 
 desc 'Show help'
 task :help do
@@ -23,34 +18,35 @@ Or
   rake -T
 To cleanup unused Gems use:
   bundle clean --force -V
-Using
-  test.xml - as test file
 HELP
-  ruby 'loadxml.rb -h'
 end
 
 desc 'Show bundle and Gem information'
 task :info do
+  # showing RVM information:
+  system 'rvm info'
+  # system 'rvm list'
+  # showing Gem information:
+  # system 'gem list --local'
   system 'gem environment'
+  # showing bundle information
   system 'bundle list'
   puts 'Showing stale gems:'
   system 'gem stale'
 end
 
-desc 'Run script without parameters'
-task :run do
-  ruby 'loadxml.rb'
+desc 'Install bundles'
+task :bundles do
+  system 'bundle check'
+  system 'bundle install'
+  # system 'bundle update'
+  system 'bundle list --verbose'
 end
 
-desc 'Run script with test XML file'
-task test: :check do
-  ruby 'loadxml.rb -v test.xml'
-end
-
-desc 'Check project syntax'
+desc 'Check project syntax with RuboCop'
 RuboCop::RakeTask.new(:check) do |task|
   # run standard syntax check first
-  ruby "-c #{srcs}"
+  # ruby "-c #{srcs}"
   # files to check
   task.patterns = srcs
   # show failures in simple format
@@ -61,13 +57,24 @@ RuboCop::RakeTask.new(:check) do |task|
   task.verbose = true
 end
 
-desc 'Document project'
-RDoc::Task.new(:rdoc) do |rdoc|
-  rdoc.main = 'README.md'
-  rdoc.options << '--all'
-  rdoc.rdoc_dir = 'rdocs'
-  # rdoc.rdoc_files.include('CHANGES')
-  # rdoc.rdoc_files.include('LICENSE')
-  # rdoc.rdoc_files.include('VERSION')
-  rdoc.title = ENV['title'] || 'Ruby Load XML Example'
+desc 'Run script with test XML file'
+task test: :check do
+  Benchmark.bm do |b|
+    srcs.each { |s| b.report { ruby s } if s.end_with? '.rb' }
+  end
 end
+
+desc 'Document project'
+RDoc::Task.new(:doc) do |task|
+  task.main = 'README.md'
+  task.options << '--all'
+  task.rdoc_dir = 'rdocs'
+  task.rdoc_files.include('*.rb')
+  # task.rdoc_files.include('CHANGES')
+  # task.rdoc_files.include('LICENSE')
+  # task.rdoc_files.include('VERSION')
+  task.title = ENV['title'] || 'Ruby Load XML Example'
+end
+
+CLEAN.include('**/*.bak', '**/*~')
+CLOBBER.include('rdocs/', 'pkg/')
