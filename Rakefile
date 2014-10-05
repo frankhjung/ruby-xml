@@ -78,7 +78,7 @@ RDoc::Task.new(:doc) do |task|
   # task.rdoc_files.include('CHANGES')
   task.rdoc_files.include('LICENSE')
   # task.rdoc_files.include('VERSION')
-  task.title = ENV['title'] || 'Ruby Load XML Example'
+  task.title = ENV['title'] || 'Ruby Process XML Example'
 end
 
 CLEAN.include('**/*.bak', '**/*~')
