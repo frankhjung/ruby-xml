@@ -60,7 +60,7 @@ if opts[:verbose]
   puts "(3) dump XML file\n"
   File.open(opts[:file], 'r') do |xmlDoc|
     printf "\tContents of %s:\n", opts[:file]
-    xmlDoc.each_line puts "\t#{$LAST_READ_LINE}"
+    xmlDoc.each_line { |line| puts "\t#{line}" }
   end
   puts
 end

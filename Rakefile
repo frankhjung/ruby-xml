@@ -7,7 +7,8 @@ task default: :test
 task cleanall: [:clean, :clobber]
 task all: [:clean, :clobber, :check, :test, :build]
 
-srcs = FileList.new('*.rb', 'Rakefile')
+tests = FileList.new('tests/test_*.rb')
+srcs = FileList.new('lib/*.rb')
 
 desc 'Show help'
 task :help do
@@ -48,8 +49,8 @@ RuboCop::RakeTask.new(:check) do |task|
   # run standard syntax check first
   # ruby "-c #{srcs}"
   # files to check
-  task.patterns = srcs
-  # show failures in simple format
+  task.patterns = ['Rakefile'] + srcs + tests
+  # report format: simple, progress, files, offenses, clang, disabled
   task.formatters = ['simple']
   # continue on finding errors
   task.fail_on_error = false
