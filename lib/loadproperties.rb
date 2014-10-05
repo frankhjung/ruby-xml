@@ -2,6 +2,9 @@
 # coding: utf-8
 
 # Load a properties file into a hash.
+#
+# Author:: Frank Jung
+# License:: see LICENSE
 class LoadProperties
   # returns the complete properties file as a list
   attr_reader :as_list

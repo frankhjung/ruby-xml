@@ -1,11 +1,10 @@
-require 'benchmark'
 require 'rake/clean'
 require 'rdoc/task'
 require 'rubocop/rake_task'
 
 task default: :test
 task cleanall: [:clean, :clobber]
-task all: [:clean, :clobber, :check, :test, :build]
+task all: [:clean, :clobber, :check, :test, :doc]
 
 tests = FileList.new('tests/test_*.rb')
 srcs = FileList.new('lib/*.rb')
@@ -59,9 +58,9 @@ RuboCop::RakeTask.new(:check) do |task|
 end
 
 desc 'Run script with test XML file'
-task test: :check do
-  Benchmark.bm do |b|
-    srcs.each { |s| b.report { ruby s } if s.end_with? '.rb' }
+task :test do
+  tests.each do |test|
+    ruby test
   end
 end
 
@@ -70,9 +69,9 @@ RDoc::Task.new(:doc) do |task|
   task.main = 'README.md'
   task.options << '--all'
   task.rdoc_dir = 'rdocs'
-  task.rdoc_files.include('*.rb')
+  task.rdoc_files.include(srcs + tests)
   # task.rdoc_files.include('CHANGES')
-  # task.rdoc_files.include('LICENSE')
+  task.rdoc_files.include('LICENSE')
   # task.rdoc_files.include('VERSION')
   task.title = ENV['title'] || 'Ruby Load XML Example'
 end
