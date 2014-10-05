@@ -38,33 +38,32 @@ employees = Employees.new
 employees.load(opts[:file])
 
 # show for 2012
-test = 0
 turnover = employees.get_all_by_year(2012)
-puts "(#{test+=1}) show a results for 2012 = #{turnover}\n"
+puts "(1}) show a results for 2012 = #{turnover}\n"
 
 # show for foo for 2011
 turnover = employees.get_by_year('foo', 2011)
-puts "(#{test+=1}) show results for foo in 2011 = #{turnover}\n"
+puts "(2) show results for foo in 2011 = #{turnover}\n"
 
 # show for foo for 2012
 turnover = employees.get_by_year('foo', 2012)
-puts "(#{test+=1}) show results for foo in 2012 = #{turnover}\n"
+puts "(3) show results for foo in 2012 = #{turnover}\n"
 
 # show for foo for 2013
 turnover = employees.get_by_year('foo', 2013)
-puts "(#{test+=1}) show results for foo in 2013 = #{turnover}\n"
+puts "(4) show results for foo in 2013 = #{turnover}\n"
 
 # show for foo
 turnover = employees.get_by_name('foo')
-puts "(#{test+=1}) show results for foo (total) = #{turnover}\n"
+puts "(5) show results for foo (total) = #{turnover}\n"
 
 # show for id = 003 = foo
 turnover = employees.get_by_id('003')
-puts "(#{test+=1}) show results for 003 (total) = #{turnover}\n"
+puts "(6) show results for 003 (total) = #{turnover}\n"
 
 #  dump xml file
 if opts[:verbose]
-  puts "(#{test+=1}) dump XML file\n"
+  puts "(7) dump XML file\n"
   File.open(opts[:file], 'r') do |file|
     printf "\tContents of %s:\n", opts[:file]
     file.each_line { |line| puts "\t#{line}" }

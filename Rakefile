@@ -7,7 +7,7 @@ task cleanall: [:clean, :clobber]
 task all: [:clean, :clobber, :check, :test, :doc]
 
 tests = FileList.new('tests/test_*.rb')
-srcs = FileList.new('lib/*.rb')
+srcs = FileList.new('main.rb', 'lib/*.rb')
 
 desc 'Show help'
 task :help do
