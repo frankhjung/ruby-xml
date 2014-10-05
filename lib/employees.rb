@@ -31,7 +31,7 @@ class Employees
   # Load employees data from XML
   def load(file)
     fail unless File.exist?(file)
-    @doc = Document.new(file)
+    @doc = Document.new(File.new file)
     fail unless @doc
   end
 

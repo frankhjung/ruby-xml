@@ -57,11 +57,16 @@ RuboCop::RakeTask.new(:check) do |task|
   task.verbose = true
 end
 
-desc 'Run script with test XML file'
+desc 'Test classes'
 task :test do
   tests.each do |test|
     ruby test
   end
+end
+
+desc 'Run script with test XML file (verbose)'
+task :run do
+  ruby 'main.rb -v --file data/test.xml'
 end
 
 desc 'Document project'
