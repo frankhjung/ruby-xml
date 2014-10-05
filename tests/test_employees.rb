@@ -1,15 +1,14 @@
 #!/usr/bin/env ruby
 
-# Test XML and propertie modules
-#
-# Author:: Frank Jung
-# License:: see LICENSE
 require_relative '../lib/employees'
 require 'minitest'
 require 'minitest/autorun'
 # require 'version'
 
 # Test Employees class to read and process an XML document.
+#
+# Author:: Frank Jung
+# License:: see LICENSE
 #
 # = References
 #

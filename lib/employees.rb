@@ -4,7 +4,7 @@
 require 'rexml/document'
 
 #
-# Process employees from XML source.
+# Process employees from an XML source.
 #
 # Could also use REXML::XPath, but this is simple enough as is.
 #

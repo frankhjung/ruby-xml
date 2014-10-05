@@ -13,7 +13,7 @@ opts = Trollop.options do
 
   NAME
 
-  #{File.basename($PROGRAM_NAME)} - a Ruby example to show XML processing
+  #{File.basename($PROGRAM_NAME)} - XML processing
 
   SYNOPSIS
 

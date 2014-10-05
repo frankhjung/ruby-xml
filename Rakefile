@@ -64,7 +64,7 @@ task :test do
   end
 end
 
-desc 'Run script with test XML file (verbose)'
+desc 'Run main class (with verbose)'
 task :run do
   ruby 'main.rb -v --file data/test.xml'
 end
