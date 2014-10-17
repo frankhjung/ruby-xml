@@ -39,7 +39,7 @@ employees.load(opts[:file])
 
 # show for 2012
 turnover = employees.get_all_by_year(2012)
-puts "(1}) show a results for 2012 = #{turnover}\n"
+puts "(1) show results for all in 2012 = #{turnover}\n"
 
 # show for foo for 2011
 turnover = employees.get_by_year('foo', 2011)
