@@ -31,7 +31,7 @@ end
 # MAIN
 #
 
-Trollop.die :file, 'must exist' unless File.exist?(opts[:file]) if opts[:file]
+Trollop.die :file, 'must exist' if opts[:file] && !File.exist?(opts[:file])
 
 # load Employees data from XML
 employees = Employees.new
