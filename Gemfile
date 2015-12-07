@@ -1,5 +1,3 @@
-# using version in .ruby-version
-
 source 'https://rubygems.org'
 
 gem 'rake', '~>10.3'
