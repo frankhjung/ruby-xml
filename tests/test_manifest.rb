@@ -14,6 +14,7 @@ require 'minitest/autorun'
 # * Tested with:
 #
 #   ruby 1.9.3p484 (2013-11-22 revision 43786) [x86_64-linux].
+#   ruby 2.3.3p222 (2016-11-21 revision 56859) [x86_64-linux]
 #
 # * MiniTest:
 #
@@ -26,7 +27,7 @@ class TestManifest < Minitest::Test
     assert_instance_of(Manifest, @manifest)
     file = File.expand_path('../data/maven-metadata.xml',
                             File.dirname(__FILE__))
-    @manifest.load(File.new file)
+    @manifest.load(File.new(file))
   end
 
   # load of bad file

@@ -25,9 +25,9 @@ class Manifest
 
   # Load versions from maven manifest (XML) document
   def load(file)
-    fail unless File.exist?(file)
-    @doc = Document.new(File.new file)
-    fail unless @doc
+    raise unless File.exist?(file)
+    @doc = Document.new(File.new(file))
+    raise unless @doc
   end
 
   # Retrieve latest version from manifest

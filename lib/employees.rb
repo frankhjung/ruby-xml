@@ -30,9 +30,9 @@ class Employees
 
   # Load employees data from XML
   def load(file)
-    fail unless File.exist?(file)
-    @doc = Document.new(File.new file)
-    fail unless @doc
+    raise unless File.exist?(file)
+    @doc = Document.new(File.new(file))
+    raise unless @doc
   end
 
   # Get employee turnover by id
