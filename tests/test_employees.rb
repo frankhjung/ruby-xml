@@ -45,7 +45,7 @@ class TestEmployees < Minitest::Test
 
   # get bad employee by id
   def test_bad_by_id
-    assert_equal(nil, @employees.get_by_id('007'))
+    assert_nil(@employees.get_by_id('007'))
   end
 
   # get good employee by name
@@ -55,7 +55,7 @@ class TestEmployees < Minitest::Test
 
   # get bad employee by name
   def test_bad_by_name
-    assert_equal(nil, @employees.get_by_name('xxx'))
+    assert_nil(@employees.get_by_name('xxx'))
   end
 
   # get good employee by year
@@ -66,8 +66,8 @@ class TestEmployees < Minitest::Test
 
   # get bad employee by year
   def test_bad_by_year
-    assert_equal(nil, @employees.get_by_year('foo', 2008))
-    assert_equal(nil, @employees.get_by_year('xxx', 2012))
+    assert_nil(@employees.get_by_year('foo', 2008))
+    assert_nil(@employees.get_by_year('xxx', 2012))
   end
 
   # get good all by year
@@ -78,7 +78,7 @@ class TestEmployees < Minitest::Test
 
   # get bad all by year
   def test_bad_all_by_year
-    assert_equal(nil, @employees.get_all_by_year(2008))
-    assert_equal(nil, @employees.get_all_by_year('2008'))
+    assert_nil(@employees.get_all_by_year(2008))
+    assert_nil(@employees.get_all_by_year('2008'))
   end
 end
