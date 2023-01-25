@@ -1,4 +1,13 @@
 # see defaults in https://github.com/bbatsov/rubocop/blob/master/config/default.yml
 Metrics/MethodLength:
-  CountComments: false  # count full line comments?
+  # count full line comments?
+  CountComments: false
   Max: 15
+
+# see http://www.rubydoc.info/gems/rubocop/0.27.0/RuboCop/Cop/Metrics/AbcSize
+Metrics/AbcSize:
+  Enabled: false
+
+# Rubocop 1.44 recommendatation
+AllCops:
+  NewCops: enable

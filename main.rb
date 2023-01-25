@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# coding: utf-8
+# frozen_string_literal: true
 
 require_relative 'lib/employees'
 require 'trollop'

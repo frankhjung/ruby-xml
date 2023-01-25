@@ -1,24 +1,26 @@
+# frozen_string_literal: true
+
 require 'rake/clean'
 require 'rdoc/task'
 require 'rubocop/rake_task'
 
 task default: :test
-task cleanall: [:clean, :clobber]
-task all: [:clean, :clobber, :check, :test, :doc]
+task cleanall: %i[clean clobber]
+task all: %i[clean clobber check test doc]
 
 tests = FileList.new('tests/test_*.rb')
 srcs = FileList.new('main.rb', 'lib/*.rb')
 
 desc 'Show help'
 task :help do
-  puts <<HELP
-For Rakefile help call:
-  rake -D
-Or
-  rake -T
-To cleanup unused Gems use:
-  bundle clean --force -V
-HELP
+  puts <<~HELP
+    For Rakefile help call:
+      rake -D
+    Or
+      rake -T
+    To cleanup unused Gems use:
+      bundle clean --force -V
+  HELP
 end
 
 desc 'Show bundle and Gem information'

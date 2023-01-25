@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# coding: utf-8
+# frozen_string_literal: true
 
 require 'rexml/document'
 require 'rexml/xpath'
@@ -26,6 +26,7 @@ class Manifest
   # Load versions from maven manifest (XML) document
   def load(file)
     raise unless File.exist?(file)
+
     @doc = Document.new(File.new(file))
     raise unless @doc
   end
@@ -34,6 +35,7 @@ class Manifest
   def latest
     latest = XPath.first(@doc, '/metadata/versioning/latest')
     return unless latest
+
     latest.text
   end
 
@@ -41,6 +43,7 @@ class Manifest
   def release
     release = XPath.first(@doc, '/metadata/versioning/release')
     return unless release
+
     release.text
   end
 
@@ -48,6 +51,7 @@ class Manifest
   def versions
     versions = XPath.each(@doc, '/metadata/versioning/versions/version')
     return unless versions
+
     versions.map(&:text)
   end
 end

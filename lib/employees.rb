@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# coding: utf-8
+# frozen_string_literal: true
 
 require 'rexml/document'
 
@@ -31,6 +31,7 @@ class Employees
   # Load employees data from XML
   def load(file)
     raise unless File.exist?(file)
+
     @doc = Document.new(File.new(file))
     raise unless @doc
   end
@@ -40,6 +41,7 @@ class Employees
     turnovers =
       @doc.elements.to_a("/company/employee[@id='#{id}']/turnover/year")
     return if turnovers.empty?
+
     turnovers.map { |t| t.text.to_i }.reduce(:+)
   end
 
@@ -48,6 +50,7 @@ class Employees
     turnovers =
       @doc.elements.to_a("/company/employee[@name='#{name}']/turnover/year")
     return if turnovers.empty?
+
     turnovers.map { |t| t.text.to_i }.reduce(:+)
   end
 
@@ -58,6 +61,7 @@ class Employees
       .elements
       .to_a("/company/employee[@name='#{name}']/turnover/year[@id='#{year}']")
     return if turnovers.empty?
+
     turnovers.map { |t| t.text.to_i }.reduce(:+)
   end
 
@@ -66,6 +70,7 @@ class Employees
     turnovers =
       @doc.elements.to_a("/company/employee/turnover/year[@id='#{year}']")
     return if turnovers.empty?
+
     turnovers.map { |t| t.text.to_i }.reduce(:+)
   end
 end

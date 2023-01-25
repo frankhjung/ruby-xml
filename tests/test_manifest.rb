@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require_relative '../lib/manifest'
 require 'minitest'
@@ -57,8 +58,8 @@ class TestManifest < Minitest::Test
     versions = @manifest.versions
     refute_nil(versions)
     assert_equal(13, versions.length)
-    assert_equal('0.4.0', versions.sort[0])
-    assert_equal('2.3.0', versions.sort[-1])
+    assert_equal('0.4.0', versions.min)
+    assert_equal('2.3.0', versions.max)
     assert_includes(versions, '1.3.2')
   end
 end
